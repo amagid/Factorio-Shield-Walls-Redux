@@ -43,9 +43,7 @@ script.on_init(function()
 end)
 
 script.on_configuration_changed(function()
-  if not global.shrdata then
-    global.shrdata = generateDefaultData()
-  end
+  global.shrdata = generateDefaultData()
   getAllWalls()
 end)
 
