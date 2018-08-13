@@ -1,21 +1,3 @@
-function generateDefaultData()
-  return {
-    heal = 50,
-    portionOfTotalWallsPerTick = 1/100,
-    consolidationThreshold = 50,
-    healDelay = 1,
-    wallList = {},
-    currentIndex = 1,
-    invalidWalls = 0
-  }
-end
-
-script.on_init(function() 
-  if not global.shrdata then
-    global.shrdata = generateDefaultData()
-  end
-end)
-
 ---------Configuration variables info (feel free to change these)---------
 
 
@@ -54,6 +36,40 @@ end)
 
 ----------------------------------------Functions--------------------------------------------
 
+script.on_init(function() 
+  if not global.shrdata then
+    global.shrdata = generateDefaultData()
+  end
+end)
+
+script.on_configuration_changed(function()
+  if not global.shrdata then
+    global.shrdata = generateDefaultData()
+  end
+  getAllWalls()
+end)
+
+--Generate the default data for this mod. Change settings here.
+function generateDefaultData()
+  return {
+    heal = 50,
+    portionOfTotalWallsPerTick = 1/100,
+    consolidationThreshold = 50,
+    healDelay = 1,
+    wallList = {},
+    currentIndex = 1,
+    invalidWalls = 0
+  }
+end
+
+function getAllWalls()
+  for _, surface in ipairs(game.surfaces) do
+    addAll(surface.find_entities_filtered{name = "shielded-wall"})
+    addAll(surface.find_entities_filtered{name = "shielded-gate"})
+    addAll(surface.find_entities_filtered{name = "repulsor-wall"})
+    addAll(surface.find_entities_filtered{name = "repulsor-gate"})
+  end
+end
 
 --Called every tick. Process the next wall in the list, and heal it.
 function regen_walls(event)
@@ -113,6 +129,12 @@ function addWall(event)
      or event.created_entity.name == "repulsor-gate" then
     --Add the wall to our list of walls
     table.insert(global.shrdata.wallList, event.created_entity)
+  end
+end
+
+function addAll(wallList)
+  for _, wall in ipairs(wallList) do
+    table.insert(global.shrdata.wallList, wall)
   end
 end
 
