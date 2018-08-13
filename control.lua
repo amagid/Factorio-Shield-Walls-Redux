@@ -1,12 +1,12 @@
 function generateDefaultData()
   return {
-    global.shrdata.heal = 50,
-    global.shrdata.portionOfTotalWallsPerTick = 1/100,
-    global.shrdata.consolidationThreshold = 50,
-    global.shrdata.healDelay = 1,
-    global.shrdata.wallList = {},
-    global.shrdata.currentIndex = 1,
-    global.shrdata.invalidWalls = 0
+    heal = 50,
+    portionOfTotalWallsPerTick = 1/100,
+    consolidationThreshold = 50,
+    healDelay = 1,
+    wallList = {},
+    currentIndex = 1,
+    invalidWalls = 0
   }
 end
 
