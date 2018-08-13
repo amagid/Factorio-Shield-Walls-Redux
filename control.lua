@@ -109,7 +109,7 @@ function regen_walls(event)
         global.shrdata.currentIndex = global.shrdata.currentIndex + 1
         --If the wall list is to holey, consolidate it to remove bad indices and speed up iteration
         if global.shrdata.invalidWalls > global.shrdata.consolidationThreshold then
-          consolidateglobal.shrdata.WallList()
+          consolidateWallList()
           global.shrdata.currentIndex = 1
           global.shrdata.invalidWalls = 0
         end
