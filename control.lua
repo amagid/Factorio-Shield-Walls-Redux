@@ -61,7 +61,7 @@ function generateDefaultData()
 end
 
 function getAllWalls()
-  for _, surface in ipairs(game.surfaces) do
+  for _, surface in pairs(game.surfaces) do
     addAll(surface.find_entities_filtered{name = "shielded-wall"})
     addAll(surface.find_entities_filtered{name = "shielded-gate"})
     addAll(surface.find_entities_filtered{name = "repulsor-wall"})
